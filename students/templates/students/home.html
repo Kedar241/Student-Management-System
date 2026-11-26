@@ -5,39 +5,153 @@
 
 {% block content %}
 
+<!-- Welcome Section -->
 <div class="welcome">
 
-    <h1>Welcome to Student Management System</h1>
+    <div>
+        <h1>Welcome back, Administrator! 👋</h1>
 
-    <p>
-        Manage students, courses, teachers, attendance
-        and academic results from one place.
-    </p>
+        <p>
+            Here's what's happening with your student
+            management system today.
+        </p>
+    </div>
+
+    <div class="welcome-icon">🎓</div>
 
 </div>
 
 
+<!-- Statistics -->
+<h2 class="section-heading">Overview</h2>
+
 <div class="stats-grid">
 
     <div class="stat-card">
-        <h3>Total Students</h3>
-        <p>0</p>
+
+        <div class="stat-top">
+            <h3>Total Students</h3>
+            <div class="stat-icon icon-purple">♙</div>
+        </div>
+
+        <h2>{{ total_students }}</h2>
+
+        <small>Registered students</small>
+
     </div>
 
-    <div class="stat-card">
-        <h3>Total Courses</h3>
-        <p>0</p>
-    </div>
 
     <div class="stat-card">
-        <h3>Total Teachers</h3>
-        <p>0</p>
+
+        <div class="stat-top">
+            <h3>Total Courses</h3>
+            <div class="stat-icon icon-green">▤</div>
+        </div>
+
+        <h2>--</h2>
+
+        <small>Course module coming soon</small>
+
     </div>
 
+
     <div class="stat-card">
-        <h3>Attendance</h3>
-        <p>0%</p>
+
+        <div class="stat-top">
+            <h3>Total Teachers</h3>
+            <div class="stat-icon icon-orange">♧</div>
+        </div>
+
+        <h2>--</h2>
+
+        <small>Teacher module coming soon</small>
+
     </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-top">
+            <h3>Attendance</h3>
+            <div class="stat-icon icon-pink">◷</div>
+        </div>
+
+        <h2>--</h2>
+
+        <small>Attendance module coming soon</small>
+
+    </div>
+
+</div>
+
+
+<!-- Recent Students -->
+<div class="content-card">
+
+    <div class="table-header">
+
+        <h2>Recent Students</h2>
+
+        <a href="{% url 'student_list' %}" class="view-all">
+            View All Students →
+        </a>
+
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Email Address</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for student in recent_students %}
+
+            <tr>
+
+                <td>#{{ student.id }}</td>
+
+                <td>
+                    <strong>{{ student.full_name }}</strong>
+                </td>
+
+                <td>{{ student.email }}</td>
+
+                <td>
+                    {% if student.phone_number %}
+                        {{ student.phone_number }}
+                    {% else %}
+                        Not provided
+                    {% endif %}
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="4" class="empty-state">
+                    No students registered yet.
+                    <br><br>
+
+                    <a href="{% url 'student_create' %}"
+                       class="btn btn-primary">
+                        Add Your First Student
+                    </a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
 
 </div>
 

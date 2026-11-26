@@ -8,68 +8,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}Student Management System{% endblock %}</title>
+    <title>
+        {% block title %}Student Management System{% endblock %}
+    </title>
 
-    <link rel="stylesheet" href="{% static 'students/css/style.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'students/css/style.css' %}">
 </head>
 
 <body>
 
-    <div class="layout">
+<div class="layout">
 
-        <!-- Sidebar -->
-        <aside class="sidebar">
+    <!-- Sidebar -->
+    <aside class="sidebar">
 
-            <h2 class="logo">StudentMS</h2>
+        <h2 class="logo">Student<span>MS.</span></h2>
 
-            <p class="menu-title">MAIN MENU</p>
+        <p class="menu-title">MAIN MENU</p>
 
-            <a href="{% url 'home' %}" class="menu-link">
-                Dashboard
-            </a>
+        <a href="{% url 'home' %}" class="menu-link active">
+            <span class="menu-icon">▦</span>
+            Dashboard
+        </a>
 
-            <a href="{% url 'student_list' %}" class="menu-link">
-                Students
-            </a>
+        <a href="{% url 'student_list' %}" class="menu-link">
+            <span class="menu-icon">♙</span>
+            Students
+        </a>
 
-            <a href="#" class="menu-link">
-                Courses
-            </a>
+        <a href="#" class="menu-link">
+            <span class="menu-icon">▤</span>
+            Courses
+        </a>
 
-            <a href="#" class="menu-link">
-                Teachers
-            </a>
+        <a href="#" class="menu-link">
+            <span class="menu-icon">♧</span>
+            Teachers
+        </a>
 
-            <a href="#" class="menu-link">
-                Attendance
-            </a>
+        <a href="#" class="menu-link">
+            <span class="menu-icon">◷</span>
+            Attendance
+        </a>
 
-            <a href="#" class="menu-link">
-                Results
-            </a>
+        <a href="#" class="menu-link">
+            <span class="menu-icon">▣</span>
+            Results
+        </a>
 
-        </aside>
+    </aside>
 
+    <!-- Main Content -->
+    <main class="main-content">
 
-        <!-- Main Content -->
-        <main class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
 
-            <header class="topbar">
-                <h3>Student Management System</h3>
-                <span>Admin Panel</span>
-            </header>
+            <h3>{% block page_heading %}Dashboard{% endblock %}</h3>
 
-            <section class="page-content">
+            <div class="admin-profile">
 
-                {% block content %}
+                <div class="profile-avatar">A</div>
 
-                {% endblock %}
+                <div class="profile-info">
+                    <strong>Administrator</strong>
+                    <small>System Admin</small>
+                </div>
 
-            </section>
+            </div>
 
-        </main>
+        </header>
 
-    </div>
+        <!-- Page Content -->
+        <section class="page-content">
+
+            {% block content %}
+            {% endblock %}
+
+        </section>
+
+    </main>
+
+</div>
 
 </body>
 </html>

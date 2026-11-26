@@ -7,7 +7,19 @@ from .forms import StudentForm
 
 # HOME: Display dashboard
 def home(request):
-    return render(request, 'students/home.html')
+
+    total_students = Student.objects.count()
+
+    recent_students = Student.objects.order_by(
+        '-enrollment_date'
+    )[:5]
+
+    context = {
+        'total_students': total_students,
+        'recent_students': recent_students,
+    }
+
+    return render(request, 'students/home.html', context)
 
 
 # READ: Display all students

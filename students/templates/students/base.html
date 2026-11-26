@@ -1,0 +1,75 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Student Management System{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'students/css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <h2 class="logo">StudentMS</h2>
+
+            <p class="menu-title">MAIN MENU</p>
+
+            <a href="{% url 'home' %}" class="menu-link">
+                Dashboard
+            </a>
+
+            <a href="{% url 'student_list' %}" class="menu-link">
+                Students
+            </a>
+
+            <a href="#" class="menu-link">
+                Courses
+            </a>
+
+            <a href="#" class="menu-link">
+                Teachers
+            </a>
+
+            <a href="#" class="menu-link">
+                Attendance
+            </a>
+
+            <a href="#" class="menu-link">
+                Results
+            </a>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <h3>Student Management System</h3>
+                <span>Admin Panel</span>
+            </header>
+
+            <section class="page-content">
+
+                {% block content %}
+
+                {% endblock %}
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

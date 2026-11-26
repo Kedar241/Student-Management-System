@@ -1,99 +1,44 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
+{% extends 'students/base.html' %}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            color: #222;
-        }
+{% block title %}Dashboard | StudentMS{% endblock %}
 
-        header {
-            background: #212936;
-            color: white;
-            padding: 20px 40px;
-        }
+{% block content %}
 
-        main {
-            padding: 40px;
-        }
+<div class="welcome">
 
-        .welcome {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
+    <h1>Welcome to Student Management System</h1>
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
+    <p>
+        Manage students, courses, teachers, attendance
+        and academic results from one place.
+    </p>
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px #00000010;
-        }
+</div>
 
-        .card h3 {
-            color: #555;
-        }
 
-        .number {
-            font-size: 30px;
-            font-weight: bold;
-            color: #2563eb;
-        }
-    </style>
-</head>
+<div class="stats-grid">
 
-<body>
+    <div class="stat-card">
+        <h3>Total Students</h3>
+        <p>0</p>
+    </div>
 
-    <header>
-        <h2>Student Management System</h2>
-    </header>
+    <div class="stat-card">
+        <h3>Total Courses</h3>
+        <p>0</p>
+    </div>
 
-    <main>
+    <div class="stat-card">
+        <h3>Total Teachers</h3>
+        <p>0</p>
+    </div>
 
-        <section class="welcome">
-            <h1>Welcome to Student Management System</h1>
-            <p>Manage students, courses, attendance and academic results.</p>
-        </section>
+    <div class="stat-card">
+        <h3>Attendance</h3>
+        <p>0%</p>
+    </div>
 
-        <section class="cards">
+</div>
 
-            <div class="card">
-                <h3>Total Students</h3>
-                <p class="number">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Total Courses</h3>
-                <p class="number">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Total Teachers</h3>
-                <p class="number">0</p>
-            </div>
-
-            <div class="card">
-                <h3>Attendance</h3>
-                <p class="number">0%</p>
-            </div>
-
-        </section>
-
-    </main>
-
-</body>
-</html>
+{% endblock %}

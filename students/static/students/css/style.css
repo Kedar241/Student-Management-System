@@ -470,3 +470,51 @@ tbody tr:hover {
         display: none;
     }
 }
+
+
+/* Premium Minimal Logout Button */
+
+.logout-form {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logout-btn {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5f6fa;
+    color: #64748b;
+
+    border: 1px solid #e9edf3;
+    border-radius: 12px;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+    background: #fff0f0;
+    color: #e05252;
+    border-color: #ffdada;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(224, 82, 82, 0.10);
+}
+
+.logout-btn:active {
+    transform: scale(0.94);
+}
+
+.logout-btn svg {
+    transition: transform 0.25s ease;
+}
+
+.logout-btn:hover svg {
+    transform: translateX(2px);
+}
+

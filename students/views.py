@@ -1,4 +1,5 @@
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Student
@@ -6,6 +7,7 @@ from .forms import StudentForm
 
 
 # HOME: Display dashboard
+@login_required
 def home(request):
 
     total_students = Student.objects.count()
@@ -23,6 +25,7 @@ def home(request):
 
 
 # READ: Display all students
+@login_required
 def student_list(request):
     students = Student.objects.all()
 
@@ -32,6 +35,7 @@ def student_list(request):
 
 
 # CREATE: Add a new student
+@login_required
 def student_create(request):
 
     if request.method == 'POST':
@@ -51,6 +55,7 @@ def student_create(request):
 
 
 # UPDATE: Edit an existing student
+@login_required
 def student_update(request, pk):
 
     student = get_object_or_404(Student, pk=pk)
@@ -72,6 +77,7 @@ def student_update(request, pk):
 
 
 # DELETE: Remove a student
+@login_required
 def student_delete(request, pk):
 
     student = get_object_or_404(Student, pk=pk)
@@ -82,4 +88,23 @@ def student_delete(request, pk):
 
     return render(request, 'students/student_confirm_delete.html', {
         'student': student
+    })
+    
+
+# USER REGISTRATION
+def register(request):
+
+    if request.method == 'POST':
+
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'registration/register.html', {
+        'form': form
     })

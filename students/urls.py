@@ -4,7 +4,12 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    
+    # Registration
+    path('register/', views.register, name='register'),
 
+    
+    # Student CRUD
     path('students/', views.student_list, name='student_list'),
 
     path('students/add/', views.student_create, name='student_create'),

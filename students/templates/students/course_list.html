@@ -1,0 +1,81 @@
+
+{% extends 'students/base.html' %}
+
+{% block title %}Courses | StudentMS{% endblock %}
+
+{% block page_heading %}Course Management{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h2>Courses</h2>
+        <p>Manage all available courses.</p>
+    </div>
+
+    <a href="{% url 'course_create' %}" class="btn-primary">
+        + Add Course
+    </a>
+</div>
+
+<div class="table-container">
+
+    <table class="student-table">
+
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Description</th>
+                <th>Duration</th>
+                <th>Assigned Teacher</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for course in courses %}
+
+            <tr>
+                <td>{{ course.course_name }}</td>
+                <td>{{ course.course_code }}</td>
+                <td>{{ course.description|default:"-" }}</td>
+                <td>{{ course.duration }}</td>
+
+                <td>
+                    {% if course.teacher %}
+                        {{ course.teacher.full_name }}
+                    {% else %}
+                        Not Assigned
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a href="{% url 'course_update' course.pk %}">
+                        Edit
+                    </a>
+
+                    |
+
+                    <a href="{% url 'course_delete' course.pk %}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="6">No courses found.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

@@ -2,31 +2,34 @@
 {% extends 'students/base.html' %}
 
 {% block title %}Courses | StudentMS{% endblock %}
-
-{% block page_heading %}Course Management{% endblock %}
+{% block page_heading %}Courses{% endblock %}
 
 {% block content %}
 
-<div class="page-header">
+<div class="page-heading">
     <div>
-        <h2>Courses</h2>
-        <p>Manage all available courses.</p>
+        <h2>Course Management</h2>
+        <p>Manage and organize all available courses.</p>
     </div>
 
-    <a href="{% url 'course_create' %}" class="btn-primary">
-        + Add Course
+    <a href="{% url 'course_create' %}" class="btn btn-primary">
+        + Add New Course
     </a>
 </div>
 
-<div class="table-container">
+<div class="content-card">
 
-    <table class="student-table">
+    <div class="table-header">
+        <h2>All Courses</h2>
+        <span>{{ courses|length }} Courses</span>
+    </div>
 
+    <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Course Name</th>
                 <th>Course Code</th>
-                <th>Description</th>
                 <th>Duration</th>
                 <th>Assigned Teacher</th>
                 <th>Actions</th>
@@ -34,13 +37,16 @@
         </thead>
 
         <tbody>
-
             {% for course in courses %}
-
             <tr>
-                <td>{{ course.course_name }}</td>
+                <td>#{{ course.id }}</td>
+
+                <td>
+                    <strong>{{ course.course_name }}</strong>
+                </td>
+
                 <td>{{ course.course_code }}</td>
-                <td>{{ course.description|default:"-" }}</td>
+
                 <td>{{ course.duration }}</td>
 
                 <td>
@@ -52,28 +58,27 @@
                 </td>
 
                 <td>
-                    <a href="{% url 'course_update' course.pk %}">
-                        Edit
-                    </a>
+                    <a href="{% url 'course_update' course.id %}"
+                       class="btn btn-edit">Edit</a>
 
-                    |
-
-                    <a href="{% url 'course_delete' course.pk %}">
-                        Delete
-                    </a>
+                    <a href="{% url 'course_delete' course.id %}"
+                       class="btn btn-delete">Delete</a>
                 </td>
             </tr>
 
             {% empty %}
-
             <tr>
-                <td colspan="6">No courses found.</td>
+                <td colspan="6" class="empty-state">
+                    No courses found.
+                    <br><br>
+                    <a href="{% url 'course_create' %}"
+                       class="btn btn-primary">
+                        Add First Course
+                    </a>
+                </td>
             </tr>
-
             {% endfor %}
-
         </tbody>
-
     </table>
 
 </div>

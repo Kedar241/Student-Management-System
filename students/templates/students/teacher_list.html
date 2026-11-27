@@ -2,29 +2,37 @@
 {% extends 'students/base.html' %}
 
 {% block title %}Teachers | StudentMS{% endblock %}
-{% block page_heading %}Teachers Management{% endblock %}
+{% block page_heading %}Teachers{% endblock %}
 
 {% block content %}
 
-<div class="page-header">
+<div class="page-heading">
     <div>
-        <h2>Teachers</h2>
-        <p>Manage all registered teachers.</p>
+        <h2>Teacher Management</h2>
+        <p>Manage and organize all registered teachers.</p>
     </div>
 
-    <a href="{% url 'teacher_create' %}" class="btn-primary">
-        + Add Teacher
+    <a href="{% url 'teacher_create' %}" class="btn btn-primary">
+        + Add New Teacher
     </a>
 </div>
 
-<div class="table-container">
-    <table class="student-table">
+<div class="content-card">
+
+    <div class="table-header">
+        <h2>All Teachers</h2>
+        <span>{{ teachers|length }} Teachers</span>
+    </div>
+
+    <table>
         <thead>
             <tr>
-                <th>Name</th>
+                <th>ID</th>
+                <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Specialization</th>
+                <th>Hire Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,30 +40,50 @@
         <tbody>
             {% for teacher in teachers %}
             <tr>
-                <td>{{ teacher.full_name }}</td>
-                <td>{{ teacher.email }}</td>
-                <td>{{ teacher.phone_number|default:"-" }}</td>
-                <td>{{ teacher.specialization|default:"-" }}</td>
+                <td>#{{ teacher.id }}</td>
+
                 <td>
-                    <a href="{% url 'teacher_update' teacher.pk %}">
-                        Edit
-                    </a>
+                    <strong>{{ teacher.full_name }}</strong>
+                </td>
 
-                    |
+                <td>{{ teacher.email }}</td>
 
-                    <a href="{% url 'teacher_delete' teacher.pk %}">
-                        Delete
-                    </a>
+                <td>
+                    {{ teacher.phone_number|default:"Not provided" }}
+                </td>
+
+                <td>
+                    {{ teacher.specialization|default:"Not provided" }}
+                </td>
+
+                <td>
+                    {{ teacher.hire_date|date:"M d, Y"|default:"-" }}
+                </td>
+
+                <td>
+                    <a href="{% url 'teacher_update' teacher.id %}"
+                       class="btn btn-edit">Edit</a>
+
+                    <a href="{% url 'teacher_delete' teacher.id %}"
+                       class="btn btn-delete">Delete</a>
                 </td>
             </tr>
 
             {% empty %}
             <tr>
-                <td colspan="5">No teachers found.</td>
+                <td colspan="7" class="empty-state">
+                    No teachers found.
+                    <br><br>
+                    <a href="{% url 'teacher_create' %}"
+                       class="btn btn-primary">
+                        Add First Teacher
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
 </div>
 
 {% endblock %}
